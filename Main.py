@@ -5,18 +5,16 @@ import sys
 
 Window = Tk()
 Window.title("Pycoder")
-
+font = ("Comic Sans MS", 16)
 fontcolor = "black"
 fontback = "gray"
 
 
+try:
+    FilePath = sys.argv[1]
+except:
+    FilePath = ""
 
-FilePath = ""
-
-FilePath = sys.argv[1]
-
-
-font = ("Comic Sans MS", 16)
 
 def prompt(message):
     messagewiddow = Toplevel()
@@ -29,6 +27,7 @@ def save():
         code = editor.get("1.0", END)
         file.write(code)
 
+
 def saveas():
     global FilePath
     FilePath = asksaveasfilename(filetype = [("Python File", "*.py")])
@@ -36,16 +35,14 @@ def saveas():
         code = editor.get("1.0", END)
         file.write(code)
 
-def openfile():
 
+def openfile():
     global FilePath
-    FilePath = askopenfilename(filetype = [("Python File", "*.py")])
+    FilePath = askopenfilename(filetype = (("Python File", "*.py"),))
     with open(FilePath, "r") as file:
         code = file.read()
         editor.delete("1.0", END)
         editor.insert("1.0", code)
-
-
 
   
 def runcode():
